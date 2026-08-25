@@ -1,0 +1,18 @@
+[Unit]
+Description=Claude Watermark Remover RapidAPI service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/deniz/Documents/claude_watermark_rapid_api
+EnvironmentFile=/home/deniz/Documents/claude_watermark_rapid_api/.env
+ExecStart=/home/deniz/.conda/envs/image_enhance/bin/uvicorn main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+RestartSec=3
+
+# Harden a bit; the process only needs to read its tree and bind localhost.
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target
