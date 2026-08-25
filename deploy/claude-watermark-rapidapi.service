@@ -4,15 +4,16 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/deniz/Documents/claude_watermark_rapid_api
-EnvironmentFile=/home/deniz/Documents/claude_watermark_rapid_api/.env
-ExecStart=/home/deniz/.conda/envs/image_enhance/bin/uvicorn main:app --host 127.0.0.1 --port 8000
-Restart=on-failure
+User=root
+WorkingDirectory=/root/claude_watermark_rapidapi
+EnvironmentFile=/root/claude_watermark_rapidapi/.env
+Environment="PATH=/root/miniconda3/envs/claude_watermark_rapidapi/bin"
+ExecStart=/root/miniconda3/envs/claude_watermark_rapidapi/bin/uvicorn main:app --host 127.0.0.1 --port 8001
+Restart=always
 RestartSec=3
 
-# Harden a bit; the process only needs to read its tree and bind localhost.
 NoNewPrivileges=true
 PrivateTmp=true
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
